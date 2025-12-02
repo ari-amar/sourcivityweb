@@ -30,7 +30,7 @@ export function HeroSection() {
         <div className="animate-fade-in-up">
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 text-balance leading-tight">
             <span className="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-primary via-blue-400 to-primary">
-              Intelligent Parts Search
+              Intelligent Supplier Search
             </span>
             <br />
             <span className="text-foreground">Powered by AI</span>
