@@ -8,9 +8,9 @@ export function ExperienceSection() {
     {
       icon: Search,
       title: "Start with Intelligent Search",
-      description: "Enter a component like 'precision linear bearing' or upload a photo",
+      description: "Enter a component like 'precision linear bearing'",
       features: [
-        "AI analyzes text and images",
+        "AI analyzes text queries",
         "Get key specs to consider",
         "Common applications listed",
         "Pro tips for faster sourcing",

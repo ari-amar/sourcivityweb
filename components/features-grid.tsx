@@ -18,7 +18,7 @@ export function FeaturesGrid() {
         </svg>
       ),
       title: "AI-Powered Search",
-      description: "Search by text or photo. AI analyzes images and queries to find matching components, datasheets, and suppliers instantly.",
+      description: "AI analyzes queries to find matching components, datasheets, and suppliers instantly.",
     },
     {
       icon: () => (
@@ -48,20 +48,6 @@ export function FeaturesGrid() {
       title: "Automated RFQ Management",
       description: "Generate AI-personalized RFQ emails, track responses, and manage follow-ups with automated reminders and messaging dashboard.",
     },
-    {
-      icon: () => (
-        <svg className="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-          />
-        </svg>
-      ),
-      title: "Messages Dashboard",
-      description: "Centralized communication hub with supplier replies, follow-up tracking, and AI-generated response templates.",
-    },
   ]
 
   return (
@@ -81,7 +67,7 @@ export function FeaturesGrid() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <Card
               key={index}

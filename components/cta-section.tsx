@@ -1,12 +1,7 @@
-"use client"
-
-import type React from "react"
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Check } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 
 export function CTASection() {
-  const [hoveredStat, setHoveredStat] = useState<number | null>(null)
 
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
@@ -52,33 +47,6 @@ export function CTASection() {
           </Button>
         </div>
 
-        {/* Trust indicators */}
-        <div className="bg-card/50 backdrop-blur-sm border-2 border-border rounded-2xl p-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { value: "10,000+", label: "Components" },
-              { value: "500+", label: "Suppliers" },
-              { value: "50%", label: "Time Saved" },
-              { value: "24/7", label: "AI Support" },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className={`group cursor-pointer transition-all duration-300 ${
-                  hoveredStat === idx ? 'scale-110' : ''
-                }`}
-                onMouseEnter={() => setHoveredStat(idx)}
-                onMouseLeave={() => setHoveredStat(null)}
-              >
-                <div className={`text-2xl md:text-3xl font-bold mb-1 transition-colors duration-300 ${
-                  hoveredStat === idx ? 'text-primary' : 'text-foreground'
-                }`}>
-                  {item.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{item.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
