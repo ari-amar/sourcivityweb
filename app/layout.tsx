@@ -11,8 +11,8 @@ export const metadata: Metadata = {
     "The first AI-powered platform that aggregates supplier catalogs, automates RFQs, and connects you directly with US-based manufacturers and distributors.",
   keywords: ["sourcivity", "supplier search", "AI parts search", "RFQ automation", "manufacturer search", "distributor search", "parts sourcing"],
   icons: {
-    icon: '/icon.svg',
-    apple: '/icon.svg',
+    icon: '/sourcivity-logo.png',
+    apple: '/sourcivity-logo.png',
   },
   openGraph: {
     title: "sourcivity.io - AI-Powered Supplier Search",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     description: "AI-powered platform that aggregates supplier catalogs, automates RFQs, and connects you with US-based manufacturers.",
     images: ['/sourcivity-logo.png'],
   },
-  generator: "v0.app",
+  generator: "sourcivity.io",
 }
 
 export default function RootLayout({
