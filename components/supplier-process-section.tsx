@@ -8,9 +8,9 @@ export function SupplierProcessSection() {
     {
       id: "search",
       title: "Intelligent Search",
-      solution: "AI-powered text and vision search for instant component matching",
+      solution: "AI-powered search for instant component matching",
       values: [
-        "Text or photo-based search",
+        "Text-based search",
         "AI analysis of specifications",
         "Component matching algorithms",
         "Datasheet retrieval",

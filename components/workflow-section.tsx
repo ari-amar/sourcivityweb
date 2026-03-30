@@ -8,8 +8,8 @@ export function WorkflowSection() {
   const steps = [
     {
       step: 1,
-      title: "Search with Text or Photo",
-      description: "Enter a component name, specification, or upload a photo. AI's text-and-vision quickly finds matching components and datasheets.",
+      title: "Search with Text",
+      description: "Enter a component name or specification. AI quickly finds matching components and datasheets.",
       id: "intelligent-search",
     },
     {

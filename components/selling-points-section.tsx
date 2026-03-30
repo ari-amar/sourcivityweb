@@ -16,7 +16,7 @@ export function SellingPointsSection() {
     {
       icon: Target,
       title: "Accuracy",
-      description: "Precise supplier selection with AI search algorithms and photo-to-part matching.",
+      description: "Precise supplier selection with AI search algorithms and intelligent part matching.",
     },
     {
       icon: Eye,

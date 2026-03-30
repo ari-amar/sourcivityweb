@@ -10,17 +10,23 @@ export const metadata: Metadata = {
   description:
     "The first AI-powered platform that aggregates supplier catalogs, automates RFQs, and connects you directly with US-based manufacturers and distributors.",
   keywords: ["sourcivity", "supplier search", "AI parts search", "RFQ automation", "manufacturer search", "distributor search", "parts sourcing"],
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
   openGraph: {
     title: "sourcivity.io - AI-Powered Supplier Search",
     description: "AI-powered platform that aggregates supplier catalogs, automates RFQs, and connects you with US-based manufacturers.",
     url: 'https://sourcivity.io',
     siteName: 'Sourcivity',
     type: 'website',
+    images: [{ url: '/sourcivity-logo.png' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: "sourcivity.io - AI-Powered Supplier Search",
     description: "AI-powered platform that aggregates supplier catalogs, automates RFQs, and connects you with US-based manufacturers.",
+    images: ['/sourcivity-logo.png'],
   },
   generator: "v0.app",
 }

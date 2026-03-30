@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Search, Upload, Sparkles } from "lucide-react"
+import { Search, Sparkles } from "lucide-react"
 
 export function HeroSection() {
   const handleSearchInteraction = () => {
@@ -37,7 +37,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto text-pretty leading-relaxed">
-            Search by component name, specification, or upload a photo—get instant matches with datasheets and suppliers
+            Search by component name or specification—get instant matches with datasheets and suppliers
           </p>
 
           {/* Interactive demo search bar */}
@@ -57,13 +57,6 @@ export function HeroSection() {
                   onFocus={handleSearchInteraction}
                   className="w-full pl-12 pr-32 py-5 bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none cursor-pointer"
                 />
-                <button
-                  type="button"
-                  onClick={handleSearchInteraction}
-                  className="absolute right-2 p-2.5 bg-primary/10 hover:bg-primary/20 rounded-lg transition-all duration-200 group/upload"
-                >
-                  <Upload className="h-5 w-5 text-primary group-hover/upload:scale-110 transition-transform" />
-                </button>
               </div>
             </div>
             <p className="text-sm text-muted-foreground mt-3 flex items-center justify-center gap-2">
