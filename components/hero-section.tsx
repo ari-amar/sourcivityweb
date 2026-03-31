@@ -37,7 +37,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto text-pretty leading-relaxed">
-            Search by component name or specification—get instant matches with datasheets and suppliers
+            Search by component name or specification—get instant matches with verified suppliers
           </p>
 
           {/* Interactive demo search bar */}

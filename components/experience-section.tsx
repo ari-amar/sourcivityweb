@@ -29,7 +29,7 @@ export function ExperienceSection() {
     },
     {
       icon: FileText,
-      title: "Access Datasheets Instantly",
+      title: "Access Product Details Instantly",
       description: "View detailed product information and technical specifications",
       features: [
         "Engineering specifications",

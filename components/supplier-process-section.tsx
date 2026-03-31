@@ -13,7 +13,7 @@ export function SupplierProcessSection() {
         "Text-based search",
         "AI analysis of specifications",
         "Component matching algorithms",
-        "Datasheet retrieval",
+        "Specification matching",
       ],
     },
     {

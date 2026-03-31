@@ -18,7 +18,7 @@ export function FeaturesGrid() {
         </svg>
       ),
       title: "AI-Powered Search",
-      description: "AI analyzes queries to find matching components, datasheets, and suppliers instantly.",
+      description: "AI analyzes queries to find matching components and suppliers instantly.",
     },
     {
       icon: () => (

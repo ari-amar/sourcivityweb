@@ -6,7 +6,7 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sourcivity.io'),
-  title: "sourcivity.io - AI-Powered Supplier Search & RFQ Automation",
+  title: "sourcivity.io",
   description:
     "The first AI-powered platform that aggregates supplier catalogs, automates RFQs, and connects you directly with US-based manufacturers and distributors.",
   keywords: ["sourcivity", "supplier search", "AI parts search", "RFQ automation", "manufacturer search", "distributor search", "parts sourcing"],

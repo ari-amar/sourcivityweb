@@ -9,20 +9,20 @@ export function WorkflowSection() {
     {
       step: 1,
       title: "Search with Text",
-      description: "Enter a component name or specification. AI quickly finds matching components and datasheets.",
+      description: "Enter a component name or specification. AI quickly finds matching components and suppliers.",
       id: "intelligent-search",
     },
     {
       step: 2,
       title: "Review AI Recommendations",
-      description: "AI ranks results by relevance, supplier reliability, and specs. Click any component to view the supplier's product page or datasheet.",
+      description: "AI ranks results by relevance, supplier reliability, and specs. Click any component to view the supplier's product page.",
       id: "ai-recommendations",
     },
     {
       step: 3,
-      title: "Browse Suppliers & Datasheets",
+      title: "Browse Supplier Pages",
       description: "View detailed product information and technical data on supplier websites. Access engineering specifications, performance data, and dimensions.",
-      id: "browse-datasheets",
+      id: "browse-suppliers",
     },
     {
       step: 4,
