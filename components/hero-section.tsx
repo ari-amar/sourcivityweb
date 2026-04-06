@@ -7,7 +7,7 @@ import { Search, Sparkles } from "lucide-react"
 
 export function HeroSection() {
   const handleSearchInteraction = () => {
-    window.open('https://docs.google.com/forms/d/e/1FAIpQLSdK0ISylSaB5qQMRNj9Q2BLRHnGgh6cCZ0hcWuDnAd1SpyOAw/viewform?usp=dialog', '_blank')
+    window.open('https://demo.sourcivity.io/', '_blank')
   }
 
   return (
@@ -61,7 +61,7 @@ export function HeroSection() {
             </div>
             <p className="text-sm text-muted-foreground mt-3 flex items-center justify-center gap-2">
               <span className="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              Click or type to get early access
+              Click to try the live demo
             </p>
           </div>
         </div>
