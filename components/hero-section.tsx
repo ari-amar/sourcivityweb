@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useIsMobile } from "@/lib/use-mobile"
 
 const SEARCH_QUERIES = [
   "precision linear bearing 12mm shaft",
@@ -81,6 +82,7 @@ export function HeroSection() {
   const [displayed, setDisplayed] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
   const [showResults, setShowResults] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const full = SEARCH_QUERIES[queryIdx]
@@ -124,7 +126,7 @@ export function HeroSection() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          padding: "120px 24px 80px",
+          padding: isMobile ? "96px 16px 64px" : "120px 24px 80px",
           position: "relative",
           overflow: "hidden",
           background: "#050508",
@@ -215,11 +217,11 @@ export function HeroSection() {
           <p
             className="hero-fade-up hero-delay-2"
             style={{
-              fontSize: 20,
+              fontSize: isMobile ? 16 : 20,
               color: "#6b7280",
               lineHeight: 1.6,
               maxWidth: 560,
-              margin: "0 auto 44px",
+              margin: isMobile ? "0 auto 32px" : "0 auto 44px",
             }}
           >
             AI-powered supplier discovery for engineering teams. Search by component name or spec — get verified
@@ -233,7 +235,7 @@ export function HeroSection() {
                 background: "#111118",
                 border: "1.5px solid #2a2a38",
                 borderRadius: 14,
-                padding: "18px 20px 18px 52px",
+                padding: isMobile ? "14px 12px 14px 44px" : "18px 20px 18px 52px",
                 display: "flex",
                 alignItems: "center",
                 boxShadow: "0 0 0 1px rgba(0,183,235,0.1), 0 20px 60px rgba(0,0,0,0.5)",
@@ -249,17 +251,20 @@ export function HeroSection() {
                 e.currentTarget.style.borderColor = "#2a2a38"
               }}
             >
-              <div style={{ position: "absolute", left: 18, color: "#6b7280" }}>
-                <SearchIcon size={20} />
+              <div style={{ position: "absolute", left: isMobile ? 14 : 18, color: "#6b7280" }}>
+                <SearchIcon size={isMobile ? 18 : 20} />
               </div>
               <span
                 style={{
                   fontFamily: "'Space Mono', monospace",
-                  fontSize: 15,
+                  fontSize: isMobile ? 13 : 15,
                   color: "#f0f0f8",
                   flex: 1,
                   textAlign: "left",
                   minHeight: 22,
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
                 }}
               >
                 {displayed}
@@ -277,17 +282,18 @@ export function HeroSection() {
               </span>
               <div
                 style={{
-                  padding: "8px 18px",
+                  padding: isMobile ? "6px 12px" : "8px 18px",
                   borderRadius: 8,
                   background: "#00b7eb",
                   color: "#000",
-                  fontSize: 13,
+                  fontSize: isMobile ? 12 : 13,
                   fontWeight: 700,
                   flexShrink: 0,
                   whiteSpace: "nowrap",
+                  marginLeft: 8,
                 }}
               >
-                Search
+                {isMobile ? "Go" : "Search"}
               </div>
             </div>
             <p style={{ fontSize: 12, color: "#4a4a5a", marginTop: 10 }}>Click to try the live demo →</p>
@@ -338,49 +344,47 @@ export function HeroSection() {
                 <div style={{ fontSize: 11, color: "#4a4a5a", fontFamily: "'Space Mono', monospace" }}>0.4s</div>
               </div>
 
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 28px 80px 60px 60px 64px 56px",
-                  padding: "8px 16px",
-                  borderBottom: "1px solid #1e1e28",
-                  background: "rgba(255,255,255,0.03)",
-                }}
-              >
-                {["Part / Supplier", "DS", "Bore", "Load", "Type", "Price", ""].map((h, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 700,
-                      color: "#4a4a5a",
-                      letterSpacing: "0.07em",
-                      textTransform: "uppercase",
-                      textAlign: i > 1 ? "center" : "left",
-                    }}
-                  >
-                    {h}
-                  </div>
-                ))}
-              </div>
-
-              {MOCK_RESULTS.map((r, i) => (
+              {!isMobile && (
                 <div
-                  key={i}
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr 28px 80px 60px 60px 64px 56px",
-                    padding: "12px 16px",
-                    borderBottom: i < 2 ? "1px solid #1e1e28" : "none",
-                    alignItems: "center",
-                    transition: "background 0.2s",
-                    cursor: "pointer",
+                    padding: "8px 16px",
+                    borderBottom: "1px solid #1e1e28",
+                    background: "rgba(255,255,255,0.03)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(0,183,235,0.04)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
                 >
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                  {["Part / Supplier", "DS", "Bore", "Load", "Type", "Price", ""].map((h, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: "#4a4a5a",
+                        letterSpacing: "0.07em",
+                        textTransform: "uppercase",
+                        textAlign: i > 1 ? "center" : "left",
+                      }}
+                    >
+                      {h}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {MOCK_RESULTS.map((r, i) =>
+                isMobile ? (
+                  <div
+                    key={i}
+                    style={{
+                      padding: "14px 14px",
+                      borderBottom: i < 2 ? "1px solid #1e1e28" : "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 8,
+                    }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
                       <a
                         href="#"
                         style={{
@@ -388,16 +392,34 @@ export function HeroSection() {
                           fontWeight: 600,
                           color: "#00b7eb",
                           textDecoration: "none",
-                          whiteSpace: "nowrap",
+                          flex: 1,
+                          minWidth: 0,
                           overflow: "hidden",
                           textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {r.product}
                       </a>
+                      <button
+                        style={{
+                          padding: "4px 10px",
+                          borderRadius: 5,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          background: "rgba(0,183,235,0.12)",
+                          color: "#00b7eb",
+                          border: "1px solid rgba(0,183,235,0.3)",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                          flexShrink: 0,
+                        }}
+                      >
+                        + RFQ
+                      </button>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                      <span style={{ fontSize: 14 }}>{r.country}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                      <span style={{ fontSize: 13 }}>{r.country}</span>
                       <span style={{ fontSize: 11, color: "#6b7280" }}>{r.name}</span>
                       <span
                         style={{
@@ -426,58 +448,141 @@ export function HeroSection() {
                         {r.match}% match
                       </span>
                     </div>
-                  </div>
-                  <div style={{ textAlign: "center", fontSize: 16 }}>{r.datasheet ? "📄" : "—"}</div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: 12,
-                      color: "#f0f0f8",
-                      fontFamily: "'Space Mono', monospace",
-                    }}
-                  >
-                    {r.bore}
-                  </div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: 12,
-                      color: "#f0f0f8",
-                      fontFamily: "'Space Mono', monospace",
-                    }}
-                  >
-                    {r.load}
-                  </div>
-                  <div style={{ textAlign: "center", fontSize: 11, color: "#6b7280" }}>{r.type}</div>
-                  <div
-                    style={{
-                      textAlign: "center",
-                      fontSize: 11,
-                      color: "#6b7280",
-                      fontFamily: "'Space Mono', monospace",
-                    }}
-                  >
-                    {r.price}
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    <button
+                    <div
                       style={{
-                        padding: "4px 10px",
-                        borderRadius: 5,
-                        fontSize: 10,
-                        fontWeight: 700,
-                        background: "rgba(0,183,235,0.12)",
-                        color: "#00b7eb",
-                        border: "1px solid rgba(0,183,235,0.3)",
-                        cursor: "pointer",
-                        whiteSpace: "nowrap",
+                        display: "flex",
+                        gap: 14,
+                        fontSize: 11,
+                        color: "#6b7280",
+                        fontFamily: "'Space Mono', monospace",
+                        flexWrap: "wrap",
                       }}
                     >
-                      + RFQ
-                    </button>
+                      <span>
+                        Bore <span style={{ color: "#f0f0f8" }}>{r.bore}</span>
+                      </span>
+                      <span>
+                        Load <span style={{ color: "#f0f0f8" }}>{r.load}</span>
+                      </span>
+                      <span>{r.price}</span>
+                      <span>{r.datasheet ? "📄" : "—"}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ) : (
+                  <div
+                    key={i}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 28px 80px 60px 60px 64px 56px",
+                      padding: "12px 16px",
+                      borderBottom: i < 2 ? "1px solid #1e1e28" : "none",
+                      alignItems: "center",
+                      transition: "background 0.2s",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(0,183,235,0.04)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                  >
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 2 }}>
+                        <a
+                          href="#"
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: "#00b7eb",
+                            textDecoration: "none",
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                          }}
+                        >
+                          {r.product}
+                        </a>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                        <span style={{ fontSize: 14 }}>{r.country}</span>
+                        <span style={{ fontSize: 11, color: "#6b7280" }}>{r.name}</span>
+                        <span
+                          style={{
+                            fontSize: 9,
+                            fontWeight: 700,
+                            padding: "1px 5px",
+                            borderRadius: 3,
+                            background: "rgba(0,183,235,0.1)",
+                            color: "#00b7eb",
+                            border: "1px solid rgba(0,183,235,0.2)",
+                          }}
+                        >
+                          {r.type}
+                        </span>
+                        <span
+                          style={{
+                            fontSize: 9,
+                            fontWeight: 700,
+                            padding: "1px 5px",
+                            borderRadius: 3,
+                            background: "rgba(16,185,129,0.1)",
+                            color: "#10b981",
+                            border: "1px solid rgba(16,185,129,0.2)",
+                          }}
+                        >
+                          {r.match}% match
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "center", fontSize: 16 }}>{r.datasheet ? "📄" : "—"}</div>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        fontSize: 12,
+                        color: "#f0f0f8",
+                        fontFamily: "'Space Mono', monospace",
+                      }}
+                    >
+                      {r.bore}
+                    </div>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        fontSize: 12,
+                        color: "#f0f0f8",
+                        fontFamily: "'Space Mono', monospace",
+                      }}
+                    >
+                      {r.load}
+                    </div>
+                    <div style={{ textAlign: "center", fontSize: 11, color: "#6b7280" }}>{r.type}</div>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        fontSize: 11,
+                        color: "#6b7280",
+                        fontFamily: "'Space Mono', monospace",
+                      }}
+                    >
+                      {r.price}
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <button
+                        style={{
+                          padding: "4px 10px",
+                          borderRadius: 5,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          background: "rgba(0,183,235,0.12)",
+                          color: "#00b7eb",
+                          border: "1px solid rgba(0,183,235,0.3)",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        + RFQ
+                      </button>
+                    </div>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>

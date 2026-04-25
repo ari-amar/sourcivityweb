@@ -1,5 +1,7 @@
 "use client"
 
+import { useIsMobile } from "@/lib/use-mobile"
+
 const SparkleIcon = ({ size = 13 }: { size?: number }) => (
   <svg
     width={size}
@@ -31,6 +33,7 @@ const ArrowRight = ({ size = 16 }: { size?: number }) => (
 )
 
 export function CTASection() {
+  const isMobile = useIsMobile()
   return (
     <>
       <style>{`
@@ -38,7 +41,7 @@ export function CTASection() {
       `}</style>
       <section
         style={{
-          padding: "100px 24px",
+          padding: isMobile ? "64px 16px" : "100px 24px",
           background: "#0d0d12",
           position: "relative",
           overflow: "hidden",
@@ -112,7 +115,7 @@ export function CTASection() {
             </span>
           </h2>
 
-          <p style={{ fontSize: 18, color: "#6b7280", marginBottom: 44, lineHeight: 1.6 }}>
+          <p style={{ fontSize: isMobile ? 15 : 18, color: "#6b7280", marginBottom: isMobile ? 32 : 44, lineHeight: 1.6 }}>
             Be among the first teams to experience AI-powered supplier discovery and procurement.
           </p>
 
@@ -124,12 +127,12 @@ export function CTASection() {
               display: "inline-flex",
               alignItems: "center",
               gap: 10,
-              padding: "16px 36px",
+              padding: isMobile ? "13px 24px" : "16px 36px",
               borderRadius: 12,
               textDecoration: "none",
               background: "#00b7eb",
               color: "#000",
-              fontSize: 16,
+              fontSize: isMobile ? 14 : 16,
               fontWeight: 700,
               boxShadow: "0 0 40px rgba(0,183,235,0.4)",
               transition: "all 0.3s",

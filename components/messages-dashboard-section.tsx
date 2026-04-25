@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { useIsMobile } from "@/lib/use-mobile"
 
 const RFQ_STATS = [
   { value: "24", label: "Total RFQs" },
@@ -95,6 +96,7 @@ export function MessagesDashboardSection() {
   const [filter, setFilter] = useState<"all" | RFQStatus>("all")
   const [search, setSearch] = useState("")
   const [selected, setSelected] = useState<number | null>(null)
+  const isMobile = useIsMobile()
 
   const filtered = RFQ_ROWS.filter(
     (r) =>
@@ -108,7 +110,7 @@ export function MessagesDashboardSection() {
     <section
       id="dashboard"
       style={{
-        padding: "100px 24px",
+        padding: isMobile ? "64px 16px" : "100px 24px",
         background: "#050508",
         position: "relative",
         overflow: "hidden",
@@ -217,13 +219,13 @@ export function MessagesDashboardSection() {
             </div>
           </div>
 
-          <div style={{ padding: "24px" }}>
+          <div style={{ padding: isMobile ? "16px" : "24px" }}>
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(6,1fr)",
-                gap: 12,
-                marginBottom: 24,
+                gridTemplateColumns: isMobile ? "repeat(3,1fr)" : "repeat(6,1fr)",
+                gap: isMobile ? 8 : 12,
+                marginBottom: isMobile ? 16 : 24,
               }}
             >
               {RFQ_STATS.map((s, i) => (
@@ -239,7 +241,7 @@ export function MessagesDashboardSection() {
                 >
                   <div
                     style={{
-                      fontSize: 22,
+                      fontSize: isMobile ? 18 : 22,
                       fontWeight: 700,
                       fontFamily: "'Space Mono', monospace",
                       backgroundImage: "linear-gradient(135deg, #00b7eb, #60d8ff)",
@@ -296,7 +298,8 @@ export function MessagesDashboardSection() {
                 placeholder="Search RFQs…"
                 style={{
                   flex: 1,
-                  maxWidth: 220,
+                  maxWidth: isMobile ? "100%" : 220,
+                  minWidth: 0,
                   fontSize: 12,
                   color: "#f0f0f8",
                   background: "#111118",
@@ -316,113 +319,199 @@ export function MessagesDashboardSection() {
                 overflow: "hidden",
               }}
             >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "2fr 1.2fr 1fr 80px 70px 120px",
-                  padding: "10px 16px",
-                  borderBottom: "1px solid #1e1e28",
-                  background: "rgba(255,255,255,0.03)",
-                }}
-              >
-                {["Part Query", "Supplier", "Status", "Sent", "Follow-ups", "Actions"].map((h, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#4a4a5a",
-                      letterSpacing: "0.06em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {h}
-                  </div>
-                ))}
-              </div>
-
-              {filtered.map((r, i) => (
+              {!isMobile && (
                 <div
-                  key={i}
                   style={{
                     display: "grid",
                     gridTemplateColumns: "2fr 1.2fr 1fr 80px 70px 120px",
-                    padding: "12px 16px",
-                    borderBottom: i < filtered.length - 1 ? "1px solid #1e1e28" : "none",
-                    alignItems: "center",
-                    cursor: "pointer",
-                    transition: "background 0.15s",
-                    background: selected === i ? "rgba(0,183,235,0.04)" : "transparent",
+                    padding: "10px 16px",
+                    borderBottom: "1px solid #1e1e28",
+                    background: "rgba(255,255,255,0.03)",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.03)")}
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = selected === i ? "rgba(0,183,235,0.04)" : "transparent")
-                  }
-                  onClick={() => setSelected(selected === i ? null : i)}
                 >
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 600, color: "#f0f0f8", marginBottom: 2 }}>{r.query}</div>
-                    <div style={{ fontSize: 11, color: "#6b7280" }}>{r.parts}</div>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: "#f0f0f8", marginBottom: 1 }}>{r.supplier}</div>
-                    <div style={{ fontSize: 10, color: "#4a4a5a" }}>{r.email}</div>
-                  </div>
-                  <div>
-                    <span
+                  {["Part Query", "Supplier", "Status", "Sent", "Follow-ups", "Actions"].map((h, i) => (
+                    <div
+                      key={i}
                       style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 4,
                         fontSize: 11,
-                        fontWeight: 600,
-                        padding: "3px 8px",
-                        borderRadius: 5,
-                        background: `${r.statusColor}18`,
-                        color: r.statusColor,
-                        border: `1px solid ${r.statusColor}30`,
-                      }}
-                    >
-                      <span>{STATUS_ICONS[r.status]}</span> {r.statusLabel}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: 12, color: "#6b7280" }}>{r.sent}</div>
-                  <div style={{ fontSize: 12, color: "#6b7280", fontFamily: "'Space Mono', monospace" }}>
-                    {r.followUps}
-                  </div>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    <button
-                      style={{
-                        padding: "4px 10px",
-                        borderRadius: 5,
-                        fontSize: 10,
                         fontWeight: 700,
-                        background: "rgba(0,183,235,0.1)",
-                        color: "#00b7eb",
-                        border: "1px solid rgba(0,183,235,0.2)",
-                        cursor: "pointer",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      Follow-up
-                    </button>
-                    <button
-                      style={{
-                        padding: "4px 8px",
-                        borderRadius: 5,
-                        fontSize: 10,
-                        background: "transparent",
                         color: "#4a4a5a",
-                        border: "1px solid #1e1e28",
-                        cursor: "pointer",
-                        whiteSpace: "nowrap",
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
                       }}
                     >
-                      ···
-                    </button>
-                  </div>
+                      {h}
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              {filtered.map((r, i) =>
+                isMobile ? (
+                  <div
+                    key={i}
+                    style={{
+                      padding: "14px 14px",
+                      borderBottom: i < filtered.length - 1 ? "1px solid #1e1e28" : "none",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 8,
+                      background: selected === i ? "rgba(0,183,235,0.04)" : "transparent",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setSelected(selected === i ? null : i)}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: 10, alignItems: "flex-start" }}>
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: "#f0f0f8",
+                            marginBottom: 2,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {r.query}
+                        </div>
+                        <div style={{ fontSize: 11, color: "#6b7280" }}>{r.parts}</div>
+                      </div>
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                          fontSize: 10,
+                          fontWeight: 600,
+                          padding: "3px 7px",
+                          borderRadius: 5,
+                          background: `${r.statusColor}18`,
+                          color: r.statusColor,
+                          border: `1px solid ${r.statusColor}30`,
+                          flexShrink: 0,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        <span>{STATUS_ICONS[r.status]}</span> {r.statusLabel}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: 10,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ fontSize: 12, fontWeight: 600, color: "#f0f0f8" }}>{r.supplier}</div>
+                        <div style={{ fontSize: 10, color: "#4a4a5a" }}>
+                          {r.sent} · {r.followUps} follow-up{r.followUps === 1 ? "" : "s"}
+                        </div>
+                      </div>
+                      <button
+                        style={{
+                          padding: "4px 10px",
+                          borderRadius: 5,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          background: "rgba(0,183,235,0.1)",
+                          color: "#00b7eb",
+                          border: "1px solid rgba(0,183,235,0.2)",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        Follow-up
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    key={i}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "2fr 1.2fr 1fr 80px 70px 120px",
+                      padding: "12px 16px",
+                      borderBottom: i < filtered.length - 1 ? "1px solid #1e1e28" : "none",
+                      alignItems: "center",
+                      cursor: "pointer",
+                      transition: "background 0.15s",
+                      background: selected === i ? "rgba(0,183,235,0.04)" : "transparent",
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.03)")}
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.background = selected === i ? "rgba(0,183,235,0.04)" : "transparent")
+                    }
+                    onClick={() => setSelected(selected === i ? null : i)}
+                  >
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: "#f0f0f8", marginBottom: 2 }}>{r.query}</div>
+                      <div style={{ fontSize: 11, color: "#6b7280" }}>{r.parts}</div>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 12, fontWeight: 600, color: "#f0f0f8", marginBottom: 1 }}>{r.supplier}</div>
+                      <div style={{ fontSize: 10, color: "#4a4a5a" }}>{r.email}</div>
+                    </div>
+                    <div>
+                      <span
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 4,
+                          fontSize: 11,
+                          fontWeight: 600,
+                          padding: "3px 8px",
+                          borderRadius: 5,
+                          background: `${r.statusColor}18`,
+                          color: r.statusColor,
+                          border: `1px solid ${r.statusColor}30`,
+                        }}
+                      >
+                        <span>{STATUS_ICONS[r.status]}</span> {r.statusLabel}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: 12, color: "#6b7280" }}>{r.sent}</div>
+                    <div style={{ fontSize: 12, color: "#6b7280", fontFamily: "'Space Mono', monospace" }}>
+                      {r.followUps}
+                    </div>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      <button
+                        style={{
+                          padding: "4px 10px",
+                          borderRadius: 5,
+                          fontSize: 10,
+                          fontWeight: 700,
+                          background: "rgba(0,183,235,0.1)",
+                          color: "#00b7eb",
+                          border: "1px solid rgba(0,183,235,0.2)",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        Follow-up
+                      </button>
+                      <button
+                        style={{
+                          padding: "4px 8px",
+                          borderRadius: 5,
+                          fontSize: 10,
+                          background: "transparent",
+                          color: "#4a4a5a",
+                          border: "1px solid #1e1e28",
+                          cursor: "pointer",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        ···
+                      </button>
+                    </div>
+                  </div>
+                )
+              )}
 
               {filtered.length === 0 && (
                 <div style={{ padding: "32px", textAlign: "center", color: "#6b7280", fontSize: 13 }}>

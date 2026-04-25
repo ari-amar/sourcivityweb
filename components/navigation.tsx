@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
+import { useIsMobile } from "@/lib/use-mobile"
 
 const navLinks = ["Features", "How It Works", "Dashboard"]
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -33,11 +35,11 @@ export function Navigation() {
         style={{
           maxWidth: 1200,
           margin: "0 auto",
-          padding: "0 24px",
+          padding: isMobile ? "0 16px" : "0 24px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: 64,
+          height: isMobile ? 56 : 64,
         }}
       >
         <a
@@ -68,7 +70,13 @@ export function Navigation() {
           </span>
         </a>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+        <div
+          style={{
+            display: isMobile ? "none" : "flex",
+            alignItems: "center",
+            gap: 32,
+          }}
+        >
           {navLinks.map((link) => (
             <a
               key={link}
@@ -94,15 +102,16 @@ export function Navigation() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              padding: "8px 20px",
+              padding: isMobile ? "7px 14px" : "8px 20px",
               borderRadius: 8,
-              fontSize: 14,
+              fontSize: isMobile ? 13 : 14,
               fontWeight: 600,
               color: "#050508",
               background: "#00b7eb",
               textDecoration: "none",
               transition: "all 0.2s",
               boxShadow: "0 0 20px rgba(0,183,235,0.3)",
+              whiteSpace: "nowrap",
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "#22ccff"

@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { useIsMobile } from "@/lib/use-mobile"
 
 const FOOTER_LINKS = [
   { title: "Product", links: ["Features", "How It Works", "Demo", "Pricing"] },
@@ -7,6 +10,7 @@ const FOOTER_LINKS = [
 ]
 
 export function Footer() {
+  const isMobile = useIsMobile()
   return (
     <>
       <style>{`
@@ -18,7 +22,7 @@ export function Footer() {
         style={{
           background: "#050508",
           borderTop: "1px solid #1e1e28",
-          padding: "60px 24px 40px",
+          padding: isMobile ? "40px 16px 28px" : "60px 24px 40px",
           color: "#f0f0f8",
           fontFamily: "'Space Grotesk', sans-serif",
         }}
@@ -27,12 +31,12 @@ export function Footer() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1.5fr repeat(3, 1fr)",
-              gap: 40,
-              marginBottom: 60,
+              gridTemplateColumns: isMobile ? "1fr 1fr" : "1.5fr repeat(3, 1fr)",
+              gap: isMobile ? 28 : 40,
+              marginBottom: isMobile ? 36 : 60,
             }}
           >
-            <div>
+            <div style={{ gridColumn: isMobile ? "1 / -1" : undefined }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
                 <Image
                   src="/sourcivity-logo.png"

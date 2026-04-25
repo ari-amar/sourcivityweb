@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useIsMobile } from "@/lib/use-mobile"
 
 const STEPS = [
   {
@@ -52,12 +53,13 @@ const ArrowRight = ({ size = 16 }: { size?: number }) => (
 
 export function WorkflowSection() {
   const [active, setActive] = useState<number | null>(null)
+  const isMobile = useIsMobile()
 
   return (
     <section
       id="how-it-works"
       style={{
-        padding: "100px 24px",
+        padding: isMobile ? "64px 16px" : "100px 24px",
         background: "#0d0d12",
         position: "relative",
         color: "#f0f0f8",
@@ -65,7 +67,7 @@ export function WorkflowSection() {
       }}
     >
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
+        <div style={{ textAlign: "center", marginBottom: isMobile ? 40 : 64 }}>
           <div
             style={{
               display: "inline-block",

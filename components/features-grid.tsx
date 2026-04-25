@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useIsMobile } from "@/lib/use-mobile"
 
 const SearchIcon = ({ size = 20 }: { size?: number }) => (
   <svg
@@ -91,6 +92,7 @@ const FEATURES = [
 
 export function FeaturesGrid() {
   const [hovered, setHovered] = useState<number | null>(null)
+  const isMobile = useIsMobile()
 
   return (
     <>
@@ -100,7 +102,7 @@ export function FeaturesGrid() {
       <section
         id="features"
         style={{
-          padding: "100px 24px",
+          padding: isMobile ? "64px 16px" : "100px 24px",
           background: "#050508",
           position: "relative",
           color: "#f0f0f8",
@@ -120,7 +122,7 @@ export function FeaturesGrid() {
           }}
         />
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? 40 : 64 }}>
             <div
               style={{
                 display: "inline-block",
