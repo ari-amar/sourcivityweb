@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
+import { StatsBar } from "@/components/stats-bar"
 import { FeaturesGrid } from "@/components/features-grid"
 import { WorkflowSection } from "@/components/workflow-section"
 import { MessagesDashboardSection } from "@/components/messages-dashboard-section"
@@ -10,9 +11,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navigation />
-      <div id="home">
-        <HeroSection />
-      </div>
+      <HeroSection />
+      <StatsBar />
       <FeaturesGrid />
       <WorkflowSection />
       <MessagesDashboardSection />
