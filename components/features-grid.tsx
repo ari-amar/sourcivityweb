@@ -1,126 +1,246 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
+const SearchIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+)
+
+const ChartIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M18 20V10M12 20V4M6 20v-6" />
+  </svg>
+)
+
+const MailIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+  </svg>
+)
+
+const BoltIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={1.8}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+  </svg>
+)
+
+const FEATURES = [
+  {
+    Icon: SearchIcon,
+    label: "AI-Powered Search",
+    desc: "Natural language queries understood like a senior engineer. Search by part number, spec, or plain description.",
+    detail: "Semantic matching across 500+ supplier catalogues.",
+  },
+  {
+    Icon: ChartIcon,
+    label: "Smart Ranking",
+    desc: "Results ranked by relevance, supplier reliability, stock, and lead time. Pro tips on every result.",
+    detail: "Key considerations flagged automatically.",
+  },
+  {
+    Icon: MailIcon,
+    label: "Automated RFQ",
+    desc: "Generate personalized, context-aware RFQ emails per supplier. Track replies and follow-ups in one inbox.",
+    detail: "Never miss a supplier response again.",
+  },
+  {
+    Icon: BoltIcon,
+    label: "Agentic Workflow",
+    desc: "An AI agent that handles your full procurement loop — finding, contacting, and following up with suppliers autonomously.",
+    detail: "Focus on engineering, not emails.",
+  },
+]
 
 export function FeaturesGrid() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const features = [
-    {
-      icon: () => (
-        <svg className="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-      ),
-      title: "AI-Powered Search",
-      description: "AI analyzes queries to find matching components and suppliers instantly.",
-    },
-    {
-      icon: () => (
-        <svg className="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-          />
-        </svg>
-      ),
-      title: "Smart Recommendations",
-      description: "AI ranks results by relevance, supplier reliability, and specs. Get key considerations and pro tips for each search.",
-    },
-    {
-      icon: () => (
-        <svg className="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-          />
-        </svg>
-      ),
-      title: "Automated RFQ Management",
-      description: "Generate AI-personalized RFQ emails, track responses, and manage follow-ups with automated reminders and messaging dashboard.",
-    },
-    {
-      icon: () => (
-        <svg className="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z"
-          />
-        </svg>
-      ),
-      title: "Agentic Assistant",
-      description: "An autonomous AI agent that handles your entire procurement workflow — finding suppliers, generating RFQs, sending emails, and following up — so you can focus on engineering.",
-    },
-  ]
+  const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <section id="features" className="py-20 md:py-28 bg-muted/30 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20 space-y-4">
-          <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium text-primary mb-4">
-            Platform Capabilities
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground">Key Features</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive AI-powered tools to streamline your entire supplier discovery and procurement process
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="group relative bg-card/50 backdrop-blur-sm border-2 border-border hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 hover:scale-105 cursor-pointer overflow-hidden"
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
+    <>
+      <style>{`
+        @keyframes features-shimmer { 0% { transform: translateX(-100%);} 100% { transform: translateX(200%);} }
+      `}</style>
+      <section
+        id="features"
+        style={{
+          padding: "100px 24px",
+          background: "#050508",
+          position: "relative",
+          color: "#f0f0f8",
+          fontFamily: "'Space Grotesk', sans-serif",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: 800,
+            height: 300,
+            background: "radial-gradient(ellipse, rgba(0,183,235,0.05) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
+          <div style={{ textAlign: "center", marginBottom: 64 }}>
+            <div
               style={{
-                animationDelay: `${index * 100}ms`,
+                display: "inline-block",
+                padding: "5px 14px",
+                borderRadius: 100,
+                marginBottom: 16,
+                background: "rgba(0,183,235,0.08)",
+                border: "1px solid rgba(0,183,235,0.2)",
+                fontSize: 12,
+                fontWeight: 600,
+                color: "#00b7eb",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
               }}
             >
-              {/* Animated gradient background on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              Platform Capabilities
+            </div>
+            <h2
+              style={{
+                fontSize: "clamp(28px, 4vw, 48px)",
+                fontWeight: 700,
+                letterSpacing: "-0.025em",
+                marginBottom: 16,
+              }}
+            >
+              Everything you need to source faster
+            </h2>
+            <p style={{ fontSize: 17, color: "#6b7280", maxWidth: 520, margin: "0 auto" }}>
+              From first search to signed quote — one AI-powered platform.
+            </p>
+          </div>
 
-              <CardHeader className="relative z-10">
-                <div className="flex flex-col items-start space-y-4">
-                  <div className={`p-3 bg-primary/10 rounded-xl transition-all duration-300 ${
-                    hoveredIndex === index ? 'bg-primary/20 scale-110 rotate-3' : ''
-                  }`}>
-                    {feature.icon()}
-                  </div>
-                  <CardTitle className="text-xl text-card-foreground group-hover:text-primary transition-colors duration-300">
-                    {feature.title}
-                  </CardTitle>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: 20,
+            }}
+          >
+            {FEATURES.map((f, i) => (
+              <div
+                key={i}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                style={{
+                  background: hovered === i ? "#16161e" : "#111118",
+                  border: `1.5px solid ${hovered === i ? "rgba(0,183,235,0.35)" : "#1e1e28"}`,
+                  borderRadius: 16,
+                  padding: "28px 24px",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  transform: hovered === i ? "translateY(-4px)" : "none",
+                  boxShadow:
+                    hovered === i
+                      ? "0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,183,235,0.1)"
+                      : "none",
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+              >
+                {hovered === i && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      opacity: 0.6,
+                      background:
+                        "linear-gradient(105deg, transparent 40%, rgba(0,183,235,0.04) 50%, transparent 60%)",
+                      animation: "features-shimmer 1.5s infinite",
+                      pointerEvents: "none",
+                    }}
+                  />
+                )}
+                <div
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    fontFamily: "'Space Mono', monospace",
+                    color: "#4a4a5a",
+                    marginBottom: 16,
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  0{i + 1}
                 </div>
-              </CardHeader>
-              <CardContent className="relative z-10">
-                <CardDescription className="text-muted-foreground leading-relaxed text-left">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-
-              {/* Shine effect on hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                <div
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 10,
+                    marginBottom: 18,
+                    background: hovered === i ? "rgba(0,183,235,0.2)" : "rgba(0,183,235,0.08)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#00b7eb",
+                    transition: "background 0.3s",
+                  }}
+                >
+                  <f.Icon size={20} />
+                </div>
+                <div style={{ fontSize: 17, fontWeight: 700, marginBottom: 10, letterSpacing: "-0.01em" }}>
+                  {f.label}
+                </div>
+                <p style={{ fontSize: 14, color: "#6b7280", lineHeight: 1.6, marginBottom: 12 }}>{f.desc}</p>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: hovered === i ? "#00b7eb" : "#4a4a5a",
+                    fontWeight: 500,
+                    transition: "color 0.3s",
+                  }}
+                >
+                  {f.detail}
+                </div>
               </div>
-            </Card>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

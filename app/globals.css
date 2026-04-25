@@ -123,6 +123,22 @@
   }
   body {
     @apply bg-background text-foreground;
+    background: #050508;
+    color: #f0f0f8;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: rgba(0, 183, 235, 0.3);
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050508;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a38;
+    border-radius: 3px;
   }
 }
 
